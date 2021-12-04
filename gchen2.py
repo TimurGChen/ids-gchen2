@@ -7,6 +7,8 @@ import seaborn as sns
 
 sns.set()
 
+DATA_DIR = "./data/"
+
 
 # Loneliness
 components.html("""
@@ -26,7 +28,7 @@ components.html("""
 """, height=600)
 
 # US Job Search
-df_job_us = pd.read_csv("job-seeker-job-search-pew.csv").sort_values(by="Proportion", ascending=False)
+df_job_us = pd.read_csv(DATA_DIR + "job-seeker-job-search-pew.csv").sort_values(by="Proportion", ascending=False)
 fig = plt.figure(figsize=(20, 10))
 job_plot = sns.barplot(data=df_job_us, x="Proportion", y="Method", orient="h")
 job_plot.set_xlabel("Proportion (%)", fontsize=20)
@@ -43,8 +45,8 @@ components.html("""
     </div>
 """, height=600)
 # Static Comparison
-entities = list(pd.read_csv("productivity_transposed.csv")["Entity"])
-df_product = pd.read_csv("productivity.csv")
+entities = list(pd.read_csv(DATA_DIR + "productivity_transposed.csv")["Entity"])
+df_product = pd.read_csv(DATA_DIR + "productivity.csv")
 interested_entities = st.multiselect(label="Select interested economic entities for comparison",
                                     options=entities,
                                     default=["United States", "Japan", "South Africa", "Australia", "China", "Spain", "Brazil"])
